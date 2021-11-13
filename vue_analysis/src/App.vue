@@ -1,11 +1,18 @@
 <template>
-    <div class="todo-container">
-      <!-- header模块 -->
+  <div class="todo-container">
+    <!-- :message 对应的是子组件 prop 中接收变量的名称
+         "message" 对应的父组件中data中定义的数据
+       -->
+    <!-- header模块 -->
     <TodoHeader :addTodo="addTodo" />
     <!-- main 模块 -->
-   <TodoList :todos="todos" :deleteTodo="deleteTodo" :checkTodo="checkTodo"/>
+    <TodoList :todos="todos" :deleteTodo="deleteTodo" :checkTodo="checkTodo" />
     <!-- 主要的内容模块 -->
-    <TodoFooter :todos="todos" :clearDoneTodos="clearDoneTodos" :checkAllTodos="checkAllTodos" />
+    <TodoFooter
+      :todos="todos"
+      :clearDoneTodos="clearDoneTodos"
+      :checkAllTodos="checkAllTodos"
+    />
     <!-- footer模块 -->
   </div>
 </template>
@@ -13,6 +20,7 @@
 import TodoHeader from './components/MyTodoHeader'
 import TodoList from './components/MyTodoList'
 import TodoFooter from './components/MyTodoFooter'
+
 export default {
   components: {
     TodoHeader,
@@ -21,6 +29,7 @@ export default {
   },
   data () {
     return {
+      message: 'hello',
       todos: [
         { id: '001', title: '吃饭', done: true },
         { id: '002', title: '睡觉', done: false },
@@ -57,17 +66,17 @@ export default {
 }
 </script>
 <style>
-*{
-margin: 0 0;
-padding: 0 0;
+* {
+  margin: 0 0;
+  padding: 0 0;
 }
-.todo-container{
-  margin:0 auto;
+.todo-container {
+  margin: 0 auto;
   margin-top: 10px;
   width: 500px;
   height: 500px;
-  background-color: #CCC;
+  background-color: #ccc;
   border: 1px solid #ddd;
-  border-radius:8px;
+  border-radius: 8px;
 }
 </style>
