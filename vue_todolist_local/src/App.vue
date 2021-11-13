@@ -57,7 +57,10 @@ export default {
   },
   watch: {
     todos: {
-      handel(value) {
+      // 开启深度监视
+      deep: true,
+      // 如果没有深度监视 ，vue 并不会主动检测 数组内的某一个属性的变化
+      handler(value) {
         localStorage.setItem("todos", JSON.stringify(value));
       },
     },
