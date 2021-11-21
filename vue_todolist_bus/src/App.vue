@@ -1,7 +1,7 @@
 <template>
     <div class="todo-container">
       <!-- header模块 -->
-    <TodoHeader :addTodo="addTodo" />
+    <TodoHeader/>
     <!-- main 模块 -->
    <TodoList :todos="todos"/>
     <!-- 主要的内容模块 -->
@@ -54,11 +54,13 @@ export default {
   },
   // 在加载完成后就进行全局总线的绑定
   mounted () {
+    this.$bus.$on('addTodo', this.addTodo)
     this.$bus.$on('checkTodo', this.checkTodo)
     this.$bus.$on('deleteTodo', this.deleteTodo)
   },
   // 养成习惯 在组件销毁的时候，将事件进行解绑
   beforeDestroy () {
+    this.$bus.$off('addTodo')
     this.$bus.$off('checkTodo')
     this.$bus.$off('deleteTodo')
   }

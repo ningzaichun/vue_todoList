@@ -6,9 +6,6 @@
 <script>
 import { v4 as uuidv4 } from 'uuid'
 export default {
-  props: {
-    addTodo: Function
-  },
   data () {
     return {
       title: ''
@@ -26,7 +23,7 @@ export default {
       // 2. 根据输入生成一个todo对象
       const todo = { id, title, done: false }
       // 3. 添加到todos
-      this.addTodo(todo)
+      this.$bus.$emit('addTodo', todo)
       // 4. 清除输入
       this.title = ''
     }

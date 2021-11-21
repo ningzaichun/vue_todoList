@@ -1,10 +1,26 @@
 <template>
-  <li @mouseenter="handleEnter(true)" @mouseleave="handleEnter(false)" :style="{background: bgColor}">
+  <li
+    @mouseenter="handleEnter(true)"
+    @mouseleave="handleEnter(false)"
+    :style="{ background: bgColor }"
+  >
     <label>
-      <input type="checkbox"  :checked="todo.done" @click="handlerCheck(todo.id)" />
-      <span>{{todo.title}}</span>
+      <input
+        type="checkbox"
+        :checked="todo.done"
+        @click="handlerCheck(todo.id)"
+      />
+      <span>{{ todo.title }}</span>
+      <span>{{ msg }}</span>
     </label>
-    <button class="btn btn-danger" style="display:none" v-show="isShow" @click="handlerDeleteItem(todo.id)">删除</button>
+    <button
+      class="btn btn-danger"
+      style="display: none"
+      v-show="isShow"
+      @click="handlerDeleteItem(todo.id)"
+    >
+      删除
+    </button>
   </li>
 </template>
 
@@ -16,7 +32,8 @@ export default {
   data () {
     return {
       bgColor: 'white',
-      isShow: false
+      isShow: false,
+      msg: '            宁在春'
     }
   },
   methods: {
@@ -41,7 +58,18 @@ export default {
         // this.deleteTodo(id)
         this.$bus.$emit('deleteTodo', id)
       }
+    },
+    updateMsg () {
+      this.msg = '大家好啊,我叫宁在春'
     }
+  },
+  mounted () {
+    this.$bus.$on('updateMsg', this.updateMsg)
+  },
+  // 养成习惯 在组件销毁的时候，将事件进行解绑
+  beforeDestroy () {
+    this.$bus.$off('updateMsg')
   }
+
 }
 </script>

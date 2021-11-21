@@ -11,11 +11,11 @@
     </span>
     <button
       class="btn btn-danger"
-
       @click="deleteDoneAll"
     >
       清除已完成任务
     </button>
+    <button @click="updateMessag">点击修改</button>
   </div>
 </template>
 
@@ -46,6 +46,9 @@ export default {
   methods: {
     deleteDoneAll () {
       this.clearDoneTodos()
+    },
+    updateMessag () {
+      this.$bus.$emit('updateMsg')
     }
     // 通过dom元素来判断有没有进行勾选 不是最佳方式
     // checkAll (e) {
@@ -55,7 +58,6 @@ export default {
   }
 }
 </script>
-/*footer*/
 <style scoped>
 .todo-footer {
   height: 40px;
